@@ -1,7 +1,7 @@
 package com.instwall.jjevent;
 
 /**
- * Created by chenchangjun on 18/2/8.
+ * Created by yangtao on 22/9/4
  */
 
  class EConstant {

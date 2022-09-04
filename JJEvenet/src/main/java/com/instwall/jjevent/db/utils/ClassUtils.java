@@ -16,13 +16,13 @@
 package com.instwall.jjevent.db.utils;
 
 
-import com.ccj.client.android.analytics.db.annotations.Id;
-import com.ccj.client.android.analytics.db.annotations.Table;
-import com.ccj.client.android.analytics.db.exception.DbException;
-import com.ccj.client.android.analytics.db.sqlite.ManyToOneLazyLoader;
-import com.ccj.client.android.analytics.db.table.ManyToOne;
-import com.ccj.client.android.analytics.db.table.OneToMany;
-import com.ccj.client.android.analytics.db.table.Property;
+import com.instwall.jjevent.db.annotations.Id;
+import com.instwall.jjevent.db.annotations.Table;
+import com.instwall.jjevent.db.exception.DbException;
+import com.instwall.jjevent.db.sqlite.ManyToOneLazyLoader;
+import com.instwall.jjevent.db.table.ManyToOne;
+import com.instwall.jjevent.db.table.OneToMany;
+import com.instwall.jjevent.db.table.Property;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;

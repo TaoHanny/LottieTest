@@ -1,7 +1,7 @@
 package com.instwall.jjevent.db.sqlite;
 
 
-import com.ccj.client.android.analytics.db.EFinalDb;
+import com.instwall.jjevent.db.EFinalDb;
 
 import java.util.ArrayList;
 import java.util.List;

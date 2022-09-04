@@ -3,7 +3,10 @@ package com.instwall.jjevent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.instwall.jjevent.bean.EventBean;
 import com.instwall.jjevent.db.EFinalDb;
+
+import java.util.List;
 
 
 /**
@@ -12,7 +15,7 @@ import com.instwall.jjevent.db.EFinalDb;
  * 2.多线程写， 使用同一个SQLiteOpenHelpe, 并且对数据库操作方法使用synchronized 就不会出问题
 
  *
- * Created by chenchangjun on 18/2/8.
+ * Created by yangtao on 22/9/4
  */
  class EDBHelper {
 

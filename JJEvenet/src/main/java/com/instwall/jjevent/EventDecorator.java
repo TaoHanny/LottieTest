@@ -3,23 +3,21 @@ package com.instwall.jjevent;
 import android.text.TextUtils;
 
 
-
-import com.instwall.jjevent.net.gson.EGson;
-import com.instwall.jjevent.net.gson.GsonBuilder;
+import com.google.gson.Gson;
 
 import com.instwall.jjevent.bean.EventBean;
-import com.instwall.jjevent.enums.LTPType;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 事件修饰类,提供event参数
- * Created by chenchangjun on 18/2/8.
+ * Created by yangtao on 22/9/4
  */
 
 class EventDecorator {
@@ -32,24 +30,20 @@ class EventDecorator {
 
     private static final AtomicInteger eventNum = new AtomicInteger(0);//当满足连续操作大于100条,就进行上传服务
 
-   // private static  volatile long hitsCount = 0;//当前页面在一次访问中的第几次数据请求；与session_id关联，当session_id变化时重新计数，从1开始
-
     private static  final AtomicInteger hitsCount=new AtomicInteger(0) ;//当前页面在一次访问中的第几次数据请求；与session_id关联，当session_id变化时重新计数，从1开始
 
-    //MD5摘要，用于校验md5(dt+cid+type+salt)
-    private static String salt="d41d8cd98f00b204e9800998ecf84";
 
 
     public static synchronized void initCookie(String cookieStr) {
         cookie = cookieStr;
         //添加sdk版本
-        cookie += "sv=" + getURLEncode(BuildConfig.VERSION_NAME) + ";";
+        cookie += "sv=" + getURLEncode(BuildConfig.LIBRARY_PACKAGE_NAME) + ";";
         cookie += "st=" + getURLEncode("android") + ";";
         ELogger.logWrite(TAG, "initCookie successful--> " + cookie);
     }
 
 
-    public static synchronized EventBean generateEventBean(String ec, String ea, String el, Map ecp) {
+    public static synchronized EventBean generateEventBean(String ec, String ea, String el, String dockingPlatform,Map ecp) {
 
 
         EventBean bean = generateCommonBean(ecp);
@@ -65,28 +59,25 @@ class EventDecorator {
         if (el != null && !el.isEmpty()) {
             bean.setEl(el);
         }
+
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);   //获取年份
+        int month = c.get(Calendar.MONTH) + 1;  //获取月份
+        int day = c.get(Calendar.DAY_OF_MONTH);  //获取日期
+        int hour = c.get(Calendar.HOUR_OF_DAY);  //获取小时
+
+        bean.setHour(hour);
+        bean.setTimeDay(year+"年"+month+"月"+day+"日");
+
+        if (dockingPlatform != null && dockingPlatform.isEmpty()){
+            bean.setCustomData(dockingPlatform);
+        }
+
         bean.setType(EConstant.EVENT_TYPE_EVENT);
 
         return bean;
     }
 
-
-    public static synchronized EventBean generateScreenBean(String sn, LTPType ltp, Map ecp) {
-
-        EventBean bean = generateCommonBean(ecp);
-
-        //screen
-
-        if (sn != null && !sn.isEmpty()) {
-            bean.setSn(sn);
-        }
-        if (ltp != null) {
-            bean.setLtp(ltp.getTypeName());
-        }
-        bean.setType(EConstant.EVENT_TYPE_PV);
-
-        return bean;
-    }
 
     /**
      * 把 修改全局静态变量, 都放在这里处理,用synchronized修饰, 保证线程安全.
@@ -98,18 +89,14 @@ class EventDecorator {
 
         EventBean bean = new EventBean();
         //common
-        bean.setV(BuildConfig.VERSION_NAME);
+        bean.setV(BuildConfig.LIBRARY_PACKAGE_NAME);
         bean.setIt(EventDecorator.getIT());
-        bean.setTid(EventDecorator.getTID());
-        bean.setSid(EventDecorator.getSID());
-        bean.setHnb(EventDecorator.getHnbCount());
-        bean.setDs("app");
         //自定义
         if (ecp != null && !ecp.isEmpty()) {
 
-            EGson EGson = new GsonBuilder().enableComplexMapKeySerialization().create();
-            String ecpStr = EGson.toJson(ecp);
-            bean.setEcp(ecpStr);
+            Gson gson = new Gson();
+            String ecpStr = gson.toJson(ecp);
+            bean.setCustomData(ecpStr);
         }
 
         EventDecorator.refreshCurrentEventDate();//刷新点击 时间,用于比较下次点击事件,计算Sid
@@ -122,8 +109,6 @@ class EventDecorator {
 
     public static  synchronized EventBean generateExposedBean(String exposeID, String ec, String ea, Map mapEcp) {
 
-
-
         EventBean bean = generateCommonBean(mapEcp);
 
         //expsed
@@ -135,18 +120,12 @@ class EventDecorator {
             bean.setEa(ea);
         }
 
-
-
         if (!TextUtils.isEmpty(exposeID)){
             bean.setExposed_id(exposeID);
-
         }else {
             bean.setExposed_id("");
-
         }
 
-
-        bean.setM(EMD5Utils.MD5(bean.getEa()+"?"+bean.getIt()+salt));
         bean.setType(EConstant.EVENT_TYPE_EXPOSE);
         return bean;
     }
@@ -163,10 +142,6 @@ class EventDecorator {
     }
 
 
-    public static String getTID() {
-        //TODO
-        return "UA-1000000-2";
-    }
 
     /**
      * 访问结束的标志:不活动状态超过15分钟；由客户端生成

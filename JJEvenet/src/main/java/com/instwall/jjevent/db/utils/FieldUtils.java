@@ -16,11 +16,11 @@
 package com.instwall.jjevent.db.utils;
 
 
-import com.ccj.client.android.analytics.db.annotations.Id;
-import com.ccj.client.android.analytics.db.annotations.ManyToOne;
-import com.ccj.client.android.analytics.db.annotations.OneToMany;
-import com.ccj.client.android.analytics.db.annotations.Property;
-import com.ccj.client.android.analytics.db.annotations.Transient;
+import com.instwall.jjevent.db.annotations.Id;
+import com.instwall.jjevent.db.annotations.ManyToOne;
+import com.instwall.jjevent.db.annotations.OneToMany;
+import com.instwall.jjevent.db.annotations.Property;
+import com.instwall.jjevent.db.annotations.Transient;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;

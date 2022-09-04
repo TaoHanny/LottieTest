@@ -15,6 +15,7 @@
  */
 package com.instwall.jjevent.db;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -22,17 +23,17 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.ccj.client.android.analytics.db.exception.DbException;
-import com.ccj.client.android.analytics.db.sqlite.CursorUtils;
-import com.ccj.client.android.analytics.db.sqlite.DbModel;
-import com.ccj.client.android.analytics.db.sqlite.ManyToOneLazyLoader;
-import com.ccj.client.android.analytics.db.sqlite.OneToManyLazyLoader;
-import com.ccj.client.android.analytics.db.sqlite.SqlBuilder;
-import com.ccj.client.android.analytics.db.sqlite.SqlInfo;
-import com.ccj.client.android.analytics.db.table.KeyValue;
-import com.ccj.client.android.analytics.db.table.ManyToOne;
-import com.ccj.client.android.analytics.db.table.OneToMany;
-import com.ccj.client.android.analytics.db.table.TableInfo;
+import com.instwall.jjevent.db.exception.DbException;
+import com.instwall.jjevent.db.sqlite.CursorUtils;
+import com.instwall.jjevent.db.sqlite.DbModel;
+import com.instwall.jjevent.db.sqlite.ManyToOneLazyLoader;
+import com.instwall.jjevent.db.sqlite.OneToManyLazyLoader;
+import com.instwall.jjevent.db.sqlite.SqlBuilder;
+import com.instwall.jjevent.db.sqlite.SqlInfo;
+import com.instwall.jjevent.db.table.KeyValue;
+import com.instwall.jjevent.db.table.ManyToOne;
+import com.instwall.jjevent.db.table.OneToMany;
+import com.instwall.jjevent.db.table.TableInfo;
 
 import java.io.File;
 import java.io.IOException;
@@ -458,7 +459,7 @@ public class EFinalDb {
     /**
      * 删除 前xx条数据
      *
-     * @param id
+     * @param
      * @param clazz
      */
     public <T> T deleteByLimit( Class<T> clazz,int start ,int end) {
@@ -776,6 +777,7 @@ public class EFinalDb {
         return count;
     }
 
+    @SuppressLint("Range")
     public <T> String getExpiredId(Class<T> clazz, String idName, int maxCount) {
         checkTableExist(clazz);
         String strSQL = SqlBuilder.getSelectSQL(clazz);

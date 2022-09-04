@@ -15,7 +15,8 @@
  */
 package com.instwall.jjevent.db.exception;
 
-import com.ccj.client.android.analytics.exception.EventException;
+
+import com.instwall.jjevent.exception.EventException;
 
 public class DbException extends EventException {
 	private static final long serialVersionUID = 1L;

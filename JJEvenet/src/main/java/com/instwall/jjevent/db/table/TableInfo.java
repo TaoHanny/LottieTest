@@ -16,9 +16,9 @@
 package com.instwall.jjevent.db.table;
 
 
-import com.ccj.client.android.analytics.db.exception.DbException;
-import com.ccj.client.android.analytics.db.utils.ClassUtils;
-import com.ccj.client.android.analytics.db.utils.FieldUtils;
+import com.instwall.jjevent.db.exception.DbException;
+import com.instwall.jjevent.db.utils.ClassUtils;
+import com.instwall.jjevent.db.utils.FieldUtils;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;

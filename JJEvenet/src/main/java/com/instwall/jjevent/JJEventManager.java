@@ -7,14 +7,13 @@ import android.content.Context;
 import android.os.Process;
 
 
-import com.ccj.client.android.analytics.intercept.CookieFacade;
-import com.ccj.client.android.analytics.utils.EDeviceUtils;
 import com.instwall.jjevent.exception.EventException;
+import com.instwall.jjevent.utils.EDeviceUtils;
 
 
 /**
  * 事件管理
- * Created by chenchangjun on 18/2/8.
+ * Created by yangtao on 22/9/4
  */
 
 public final class JJEventManager {
@@ -131,7 +130,7 @@ public final class JJEventManager {
         private int PUSH_FINISH_DATE = EConstant.PUSH_FINISH_DATE;
 
         private String cookie = "";
-        private CookieFacade cookieIntercept;
+
 
 
         public Builder(Application application) {
@@ -199,15 +198,6 @@ public final class JJEventManager {
             EConstant. COLLECT_URL = url;
             return this;
         }
-        /**
-         * cookie 动态注入接口
-         * @param cookieIntercept
-         * @return
-         */
-        public Builder setCookieIntercept(CookieFacade cookieIntercept) {
-            this.cookieIntercept=cookieIntercept;
-            return this;
-        }
 
         /**
          * 开始构建
@@ -230,7 +220,6 @@ public final class JJEventManager {
             EConstant.PUSH_CUT_NUMBER = PUSH_CUT_NUMBER;
             EConstant.PUSH_CUT_DATE = PUSH_CUT_DATE;
             EConstant.PUSH_FINISH_DATE = PUSH_FINISH_DATE;
-            EGsonRequest.cookieIntercept=cookieIntercept;
 
             JJEventManager.init(application, cookie, DEVELOP_MODE);
         }

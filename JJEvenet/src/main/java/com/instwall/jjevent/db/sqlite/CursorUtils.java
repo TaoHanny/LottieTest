@@ -17,11 +17,11 @@ package com.instwall.jjevent.db.sqlite;
 
 import android.database.Cursor;
 
-import com.ccj.client.android.analytics.db.EFinalDb;
-import com.ccj.client.android.analytics.db.table.ManyToOne;
-import com.ccj.client.android.analytics.db.table.OneToMany;
-import com.ccj.client.android.analytics.db.table.Property;
-import com.ccj.client.android.analytics.db.table.TableInfo;
+import com.instwall.jjevent.db.EFinalDb;
+import com.instwall.jjevent.db.table.ManyToOne;
+import com.instwall.jjevent.db.table.OneToMany;
+import com.instwall.jjevent.db.table.Property;
+import com.instwall.jjevent.db.table.TableInfo;
 
 import java.util.HashMap;
 import java.util.Map.Entry;

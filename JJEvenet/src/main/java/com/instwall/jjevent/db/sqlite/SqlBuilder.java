@@ -17,12 +17,12 @@ package com.instwall.jjevent.db.sqlite;
 
 import android.text.TextUtils;
 
-import com.ccj.client.android.analytics.db.exception.DbException;
-import com.ccj.client.android.analytics.db.table.Id;
-import com.ccj.client.android.analytics.db.table.KeyValue;
-import com.ccj.client.android.analytics.db.table.ManyToOne;
-import com.ccj.client.android.analytics.db.table.Property;
-import com.ccj.client.android.analytics.db.table.TableInfo;
+import com.instwall.jjevent.db.exception.DbException;
+import com.instwall.jjevent.db.table.Id;
+import com.instwall.jjevent.db.table.KeyValue;
+import com.instwall.jjevent.db.table.ManyToOne;
+import com.instwall.jjevent.db.table.Property;
+import com.instwall.jjevent.db.table.TableInfo;
 
 import java.util.ArrayList;
 import java.util.Collection;

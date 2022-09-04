@@ -16,7 +16,7 @@
 package com.instwall.jjevent.db.table;
 
 
-import com.ccj.client.android.analytics.db.utils.FieldUtils;
+import com.instwall.jjevent.db.utils.FieldUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
